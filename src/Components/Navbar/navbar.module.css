@@ -1,0 +1,62 @@
+
+.navBox {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+}
+.title h1 {
+    font-family: "Jomhuria", serif;
+    font-size: 70px;
+    font-weight: 400;
+    line-height: 6vw;
+    text-align: center;
+    text-transform: uppercase;
+}
+.mainelement div {
+    width: 135px;
+    height: 30px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    margin-left: 24px;
+}
+.mainelement div button{
+    width: 125px;
+    all: unset;
+    font-size: 20px;
+    font-family: "Poppins",sans-serif;
+    line-height: 30px;
+    font-weight: 400;
+    font-weight: 600;
+}
+.logout{
+    width: 135px;
+    height: 30px;
+    margin-bottom: 50px;
+    margin-left: 24px;
+    text-align: center;
+}
+.logout span{
+    display: block;
+    width: 125px;
+    height: 2px;
+    background-color: black;
+    margin-bottom: 20px;
+}
+.logout button{
+    all: unset;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 30px;
+    font-family: 'Poppins',sans-serif;
+    cursor: pointer;
+    color:   #474444;
+    
+}

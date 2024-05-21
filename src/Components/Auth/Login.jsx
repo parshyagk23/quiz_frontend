@@ -3,7 +3,11 @@ import styles from "./auth.module.css";
 import { login } from "./../../Apis/Auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+  
+  const navigate = useNavigate()
   const [LoginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -47,8 +51,9 @@ const Login = () => {
 
     setLoginData({ email: "", password: "" });
     setTimeout(() => {
-      toast.success("Login successful", { position: "top-center" });
+      navigate('/dashboard')
     }, 2000);
+    toast.success("Login successful", { position: "top-center" });
   };
 
   return (
