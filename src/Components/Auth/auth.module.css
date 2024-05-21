@@ -1,11 +1,10 @@
-
-.authBox{
+.authBox {
     width: 66vw;
     text-align: center;
 
 }
 
-.title{
+.title {
     font-family: "Jomhuria", serif;
     font-size: 100px;
     font-weight: 400;
@@ -13,13 +12,16 @@
     text-align: center;
     text-transform: uppercase;
 }
-.authbtn{
+
+.authbtn {
     display: flex;
     gap: 20px;
     justify-content: center;
     align-items: center;
 }
-.signup, .login{
+
+.signup,
+.login {
     width: 200px;
     height: 37px;
     border-radius: 10px;
@@ -27,9 +29,11 @@
     cursor: pointer;
 
 }
-.signup button, .login button {
+
+.signup button,
+.login button {
     all: unset;
-    font-family: "Poppins",sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 20px;
     font-weight: 600;
     line-height: 30px;
@@ -37,21 +41,23 @@
 
 /* auth */
 
-.auth{  
+.auth {
     height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.auth div{
+
+.auth div {
     display: flex;
     gap: 25px;
     justify-content: center;
-    margin: 20px 0 0px 0 ;
+    margin: 20px 0 0px 0;
 }
-.auth div label{
-    font-family: 'Popppins' , sans-serif;
+
+.auth div label {
+    font-family: 'Popppins', sans-serif;
     font-weight: 600;
     font-size: 20px;
     line-height: 30px;
@@ -59,23 +65,27 @@
     width: 187px;
     text-align: end;
 }
-.username::placeholder{
+
+.username::placeholder {
     color: red;
 }
-.auth div input{
+
+.auth div input {
     width: 388px;
     height: 38px;
-    border-radius: 10px 10px 0 0 ;
+    border-radius: 10px 10px 0 0;
     border: 1px solid black;
     background-color: #f4f4f4;
     outline: none;
-    font-size: 15px ;
+    font-size: 15px;
     font-family: "poppins", sans-serif;
     font-weight: 500;
     line-height: 19px;
     padding-left: 20px;
 }
-.Signbtn,.loginbtn{
+
+.Signbtn,
+.loginbtn {
     width: 274px;
     height: 38px;
     background-color: #A9bcef;
@@ -84,9 +94,11 @@
     justify-content: center;
     cursor: pointer;
 }
-.Signbtn button,.loginbtn button{
+
+.Signbtn button,
+.loginbtn button {
     all: unset;
-    font-family: "Poppins" ,sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 20px;
     font-weight: 600;
     line-height: 30px;
