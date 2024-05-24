@@ -1,0 +1,53 @@
+
+.analysis{
+    height: 90vh;
+    margin: 0 auto; 
+    margin-top: 50px;
+    
+}
+.analysis h1{
+    font-family: "Poppins",sans-serif;
+    font-size: 50px;
+    font-weight: 600;
+    line-height: 75px;
+    text-align: center;
+    color: #5076FF;
+}
+section{
+    overflow-y: scroll;
+    height: calc(80vh - 71px);;
+}
+table{
+    width: 70vw;
+    margin: 0 auto;
+    border-spacing: 0px;
+}
+table thead{
+    width: 925px;
+    height: 35px;
+    margin: 0 auto;
+    border-radius:10px;
+
+}
+table thead tr th{
+    color: #FFF;
+    background-color: #5076FF;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+/* table tbody tr td {
+    background: #B3C4FF;
+} */
+table thead tr th,table tbody tr td{
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+}
+svg{
+    margin-top: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}

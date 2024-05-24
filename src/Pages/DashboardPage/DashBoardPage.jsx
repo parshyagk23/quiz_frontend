@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../../Components/Navbar/Navbar'
 import styles from './../../Components/Dashboard/dashboard.module.css'
-import Sharequiz from '../../Components/Quiz/Sharequiz'
+import Analytics from '../../Components/Quiz Analysis/Analytics'
+import Dashboard from '../../Components/Dashboard/Dashboard'
 const DashBoardPage = () => {
+  const [Analysis,setAnalysis]= useState(false)
+  const [OpenDashbord,setDashboard]= useState(false)
   return (
     <main  className={styles.dashboard}>
-      <Navbar/>
-      <Sharequiz/>
+      <Navbar setAnalysis={setAnalysis} setDashboard={setDashboard} />
+      {Analysis && <Analytics/>}
+      {OpenDashbord&&<Dashboard/>}
+      
     </main>
   )
 }

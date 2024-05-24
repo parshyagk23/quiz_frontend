@@ -19,3 +19,16 @@ export const PostQuiz = async (QuizName,QuizType,QuizId,Questions) => {
         return error.response;
     }
   };
+export const getQuizByUserId = async () => {
+    try {
+        const token = Cookies.get('token')
+        axios.defaults.headers.common["Authorization"]=token
+        const reqUrl = `${QUIZURL}/userquiz`;
+       
+        const responce = await axios.get(reqUrl);
+        
+        return responce.data;
+    } catch (error) {
+        return error.response;
+    }
+  };

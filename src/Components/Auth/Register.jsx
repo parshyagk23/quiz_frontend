@@ -119,7 +119,7 @@ const Register = ({ setisLogin }) => {
               error.email === "invalid email" ? { border: "1px solid red" } : {}
             }
             placeholder={error.email || "enter email"}
-            value={RegisterData.email}
+            value={error.email?"":RegisterData.email}
             id="email"
             type="email"
             onChange={handleOnchange}

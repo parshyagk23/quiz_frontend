@@ -21,7 +21,7 @@ const Sharequiz = ({QuizId ,openShareLink ,setopenShareLink}) => {
     },
   };
   const handleShareQuizLink = ()=>{
-    navigator.clipboard.writeText(QuizId)
+    navigator.clipboard.writeText(`https://quiz-backend-00ip.onrender.com${QuizId}`)
     toast.success('Link copied to Clipboard',{position:'top-right'})
     
   }
@@ -40,7 +40,7 @@ const Sharequiz = ({QuizId ,openShareLink ,setopenShareLink}) => {
             <h1>Congrats your Quiz is Published!</h1>
           </div>
           <div>
-            <h2>{QuizId}</h2>
+            <h2>{`https://quiz-backend-00ip.onrender.com${QuizId}`}</h2>
           </div>
           <div onClick={handleShareQuizLink}>
             <button>Share</button>

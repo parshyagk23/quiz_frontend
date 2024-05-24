@@ -3,7 +3,7 @@ import styles from './navbar.module.css'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import SelectQuiz from '../Quiz/SelectQuiz'
-const Navbar = () => {
+const Navbar = ({setAnalysis,setDashboard}) => {
   const navigate = useNavigate()
   const [openQuiz,setopenQuiz] = useState(false)
 
@@ -21,10 +21,16 @@ const Navbar = () => {
           <h1>QUIZZE</h1>
       </div>
       <div className={styles.mainelement} >
-          <div>
+          <div onClick={()=>{
+            setAnalysis(false)
+            setDashboard(true)
+            }} >
               <button>Dashboard</button>
           </div>
-          <div>
+          <div onClick={()=>{
+            setDashboard(false)
+            setAnalysis(true)
+            }}>
               <button>Analytics</button>
           </div>
           <div onClick={()=>{setopenQuiz(true)}} >

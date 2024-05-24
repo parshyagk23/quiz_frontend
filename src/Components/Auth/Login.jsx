@@ -67,7 +67,8 @@ const Login = () => {
               error.email === "invalid email" ? { border: "1px solid red" } : {}
             }
             placeholder={error.email || "enter email"}
-            value={LoginData.email}
+           
+            value={error.email?"":LoginData.email}
             id="email"
             type="email"
             onChange={handleOnchange}
