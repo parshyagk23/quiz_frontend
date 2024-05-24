@@ -8,6 +8,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<ProtectedRoute Component={DashBoardPage} />} />
+        
       </Routes>
     </>
   );

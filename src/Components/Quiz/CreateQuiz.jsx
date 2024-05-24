@@ -58,7 +58,10 @@ const CreateQuiz = ({
           PollCount: 0,
         },
       ],
+      AttemptedQuestion:0,
+      CorrectAns:0,
     },
+
   ]);
 
   const CorrectAnsStyle = {
@@ -87,6 +90,8 @@ const CreateQuiz = ({
           PollCount: 0,
         },
       ],
+      AttemptedQuestion:0,
+      CorrectAns:0,
     };
     setQuiz([...Quiz, QuizVal]);
     setSlides([...Slides, addslide]);

@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Analysis.module.css";
 import { getQuizByUserId } from "../../Apis/Quiz";
-const Analytics = () => {
+import QuestionWiseAnalyasis from "./QuestionWiseAnalyasis";
+const Analytics = ({openQueAnalysis,setopenQueAnalysis,Analysis}) => {
   const [QuizAnalysis, setQuizAnalysis] = useState();
+  const [QesAnalysis, setQesAnalysis] = useState();
   const [loading,setLoading]= useState(false)
+  const [index,setIndex]= useState()
+  
+
   useEffect(() => {
     setTimeout(() => {
       getQuizAnalysisData();
     }, 1000);
-  }, []);
+  }, [openQueAnalysis]);
+
   const getQuizAnalysisData = async () => {
     setLoading(true)
     const res = await getQuizByUserId();
@@ -19,6 +25,7 @@ const Analytics = () => {
     setLoading(false)
     return
   };
+
   const getQuizCreationDate = (isoDate )=>{
     const date =new Date(isoDate)
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -29,13 +36,15 @@ const Analytics = () => {
     const formattedData = `${day} ${month},${year}`
     return formattedData
   }
-  return (
 
+  return (
+<main>
+    {(openQueAnalysis && Analysis ) &&
     <main className={styles.analysis}>
       <h1>Quiz Analysis</h1>
      {QuizAnalysis?.length==0?
      <p style={{ width:'30vw', margin:'0 auto' }} >Not Data found</p>
-     : <section>
+     : <section style={{overflowY: "scroll" ,height: "calc(80vh - 71px)"}} >
      <table>
        <thead>
          <tr>
@@ -101,12 +110,21 @@ const Analytics = () => {
                />
              </svg>
            </td>
-           <td style={index%2!==0?{ borderRadius:'0 10px 10px 0',background: '#B3C4FF',zIndex:'1' ,textDecoration:'underline'}:{textDecoration:'underline'}}  >Qestion wish Analsis</td>
+           <td style={index%2!==0?{ borderRadius:'0 10px 10px 0',background: '#B3C4FF',zIndex:'1' ,textDecoration:'underline', cursor:'pointer'}:{textDecoration:'underline',cursor:'pointer'}} onClick={()=>{
+            setQesAnalysis(data)
+            setIndex(index+1)
+            setopenQueAnalysis(false)
+            }}  >Qestion wish Analsis</td>
          </tr>
        ))}
      </tbody>}
      </table>
    </section>}
+    </main> }
+    {!openQueAnalysis  &&  <main>
+      <QuestionWiseAnalyasis QesAnalysis={QesAnalysis} index={index} />
+      
+     </main>}
     </main>
   );
 };

@@ -1,6 +1,7 @@
 
 .analysis{
     height: 90vh;
+    width: 83vw;
     margin: 0 auto; 
     margin-top: 50px;
     
@@ -13,10 +14,7 @@
     text-align: center;
     color: #5076FF;
 }
-section{
-    overflow-y: scroll;
-    height: calc(80vh - 71px);;
-}
+
 table{
     width: 70vw;
     margin: 0 auto;
@@ -50,4 +48,66 @@ svg{
     margin-top: 20px;
     margin-right: 10px;
     cursor: pointer;
+}
+/* Question wise analsis */
+
+.questiontitle{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+.questiontitle div h1{
+    font-family: "Poppins",sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 60px;
+    text-align: left;
+    color: #5076FF;
+}
+.created p{
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 22.5px;
+    text-align: left;
+    color: #FF5D01;
+    
+}
+.question{
+    width: 828px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.question h1{
+    font-family: "Poppins",sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 45px;
+    text-align: left;
+
+}
+.question div div{
+    margin-top: 30px;
+    width: 245px;
+    height: 89px;
+    background-color: #FFF;
+}
+.question div h1{
+    font-family: "Poppins",sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 45px;
+    text-align: center;
+    color: #474444;
+            
+}
+.question div p{
+    font-family: "Poppins",sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: center;
+    color: #474444;
+
+
 }

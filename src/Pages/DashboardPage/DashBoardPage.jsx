@@ -6,10 +6,11 @@ import Dashboard from '../../Components/Dashboard/Dashboard'
 const DashBoardPage = () => {
   const [Analysis,setAnalysis]= useState(false)
   const [OpenDashbord,setDashboard]= useState(false)
+  const [openQueAnalysis,setopenQueAnalysis]= useState(true)
   return (
     <main  className={styles.dashboard}>
-      <Navbar setAnalysis={setAnalysis} setDashboard={setDashboard} />
-      {Analysis && <Analytics/>}
+      <Navbar setAnalysis={setAnalysis} setDashboard={setDashboard} setopenQueAnalysis={setopenQueAnalysis} />
+      {Analysis && <Analytics  Analysis={Analysis} openQueAnalysis={openQueAnalysis} setopenQueAnalysis={setopenQueAnalysis}/>}
       {OpenDashbord&&<Dashboard/>}
       
     </main>
