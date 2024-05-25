@@ -249,7 +249,7 @@
 
 /* share quiz */
 .sharebox {
-    width: 670px;
+    width: 68vw;
     margin: 0 auto;
 }
 
@@ -268,11 +268,13 @@
     font-size: 40px;
     line-height: 59px;
     text-align: center;
+    color: #474444;
+    
 }
 
 .sharebox div:nth-child(3) {
-    width: 650px;
-    height: 60px;
+    width: 68vw;
+    height: 100px;
     border-radius: 10px;
     background: #ededed;
 
@@ -293,9 +295,11 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 25px;
-    line-height: 60px;
+    line-height: 46px;
     margin-left: 20px;
     text-align: center;
+    color: #474444;
+
 }
 
 .sharebox div:nth-child(4) button {

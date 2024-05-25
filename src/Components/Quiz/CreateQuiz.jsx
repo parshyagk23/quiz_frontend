@@ -205,40 +205,40 @@ const CreateQuiz = ({
       let count =0;
       Options.map((data) => {
         const { text, imageUrl, isCorrectAns, PollCount } = data;
-        if(!isCorrectAns)  count++;
+        if(OptionType === "Q&A" && !isCorrectAns)  count++;
         if(count=== Options.length) {
           setError(true)
           return;
         }
         if (OptionType === "Q&A") {
-          if (OptionType === timer[0]) {
+          if (OptionType === optionType[0]) {
             if (text === "" || isCorrectAns == undefined) {
               setError(true);
               return;
             }
-          } else if (OptionType === timer[1]) {
+          } else if (OptionType === optionType[1]) {
             if (imageUrl === "" || isCorrectAns == undefined) {
               setError(true);
               return;
             }
-          } else if (OptionType === timer[2]) {
+          } else if (OptionType === optionType[2]) {
             if (text === "" || imageUrl === "" || isCorrectAns == undefined) {
               setError(true);
               return;
             }
           }
         } else {
-          if (OptionType === timer[0]) {
+          if (OptionType === optionType[0]) {
             if (text === "") {
               setError(true);
               return;
             }
-          } else if (OptionType === timer[1]) {
+          } else if (OptionType === optionType[1]) {
             if (imageUrl === "") {
               setError(true);
               return;
             }
-          } else if (OptionType === timer[2]) {
+          } else if (OptionType === optionType[2]) {
             if (text === "" || imageUrl === "") {
               setError(true);
               return;
@@ -513,7 +513,7 @@ const CreateQuiz = ({
           <p
             style={{
               width: "300px",
-              margin: "120px auto 0 auto",
+              margin: "95px auto 0 auto",
               color: "red",
               fontFamily: "Poppins , sans-sarif",
               textAlign: "center",
