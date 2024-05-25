@@ -226,7 +226,7 @@
     border-radius: 10px;
     font-family: "Poppins", sans-serif;
     position: absolute;
-    top: 257px;
+    top: 200px;
     right: 61px;
 }
 
@@ -295,7 +295,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 25px;
-    line-height: 46px;
+    line-height: 90px;
     margin-left: 20px;
     text-align: center;
     color: #474444;

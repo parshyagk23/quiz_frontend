@@ -12,7 +12,6 @@ const CreateQuiz = ({
   const customStyles = {
     content: {
       width: "60vw",
-      height: "80vh",
       top: "50%",
       left: "50%",
       right: "auto",
@@ -22,6 +21,8 @@ const CreateQuiz = ({
       borderRadius: "15px",
       background: "#FFF",
       boxShadow: " rgba(0, 0, 0, 0.15) 0px 5px 15px",
+      zIndex:'1'
+      
     },
   };
   const optionType = ["Text", "Image URL", "Text & Image URL"];
@@ -36,7 +37,7 @@ const CreateQuiz = ({
   const [CurrentSlides, setCurrentSlides] = useState(0);
   const [openShareLink,setopenShareLink]= useState(false)
   const [AddOptions, setAddOptions] = useState([1, 2]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [QuizId, setQuizId] = useState("");
 
   const [Quiz, setQuiz] = useState([
@@ -80,13 +81,13 @@ const CreateQuiz = ({
         {
           text: "",
           imageUrl: "",
-          isCorrectAns: "",
+          isCorrectAns: false,
           PollCount: 0,
         },
         {
           text: "",
           imageUrl: "",
-          isCorrectAns: "",
+          isCorrectAns: false,
           PollCount: 0,
         },
       ],
@@ -192,14 +193,17 @@ const CreateQuiz = ({
   };
   
   const handleCreateQuiz = async () => {
+    let isError;
     if (!QuizName || !QuizType) {
       setError(true);
+      isError=true
       return;
     }
     Quiz.map( (data) => {
       const { Question, OptionType, Options, timer } = data;
       if (!Question || !OptionType || timer==undefined) {
         setError(true);
+        isError=true
         return;
       }
       let count =0;
@@ -208,39 +212,47 @@ const CreateQuiz = ({
         if(OptionType === "Q&A" && !isCorrectAns)  count++;
         if(count=== Options.length) {
           setError(true)
+          isError=true
           return;
         }
         if (OptionType === "Q&A") {
           if (OptionType === optionType[0]) {
             if (text === "" || isCorrectAns == undefined) {
               setError(true);
+              isError=true
               return;
             }
           } else if (OptionType === optionType[1]) {
             if (imageUrl === "" || isCorrectAns == undefined) {
               setError(true);
+              isError=true
               return;
             }
           } else if (OptionType === optionType[2]) {
             if (text === "" || imageUrl === "" || isCorrectAns == undefined) {
               setError(true);
+              isError=true
               return;
             }
           }
-        } else {
+        } else if(OptionType === "Poll") {
+          console.log(OptionType)
           if (OptionType === optionType[0]) {
             if (text === "") {
               setError(true);
+              isError=true
               return;
             }
           } else if (OptionType === optionType[1]) {
             if (imageUrl === "") {
               setError(true);
+              isError=true
               return;
             }
           } else if (OptionType === optionType[2]) {
             if (text === "" || imageUrl === "") {
               setError(true);
+              isError=true
               return;
             }
           }
@@ -248,13 +260,17 @@ const CreateQuiz = ({
       });
 
     });
-    
+    if(isError) return
     const newQuizId = generateQuizId();
     setQuizId(newQuizId);
-    const res =await PostQuiz(QuizName,QuizType,newQuizId,Quiz);
-    if(res.message==="Quiz create successfully")
+   
+    let res;
+    if(!isError){
+       res =await PostQuiz(QuizName,QuizType,newQuizId,Quiz);
+
+    }
+    if(res?.message==="Quiz create successfully")
       {
-        setError(false)
         setopenShareLink(true)
 
       }
@@ -371,7 +387,7 @@ const CreateQuiz = ({
           </div>
         </section>
 
-        <section style={{ marginLeft:'46px' }} >
+        <section style={{ marginLeft:'46px' , }} >
           <div className={styles.option}>
             {Quiz[CurrentSlides]?.Options?.map((val, index) => (
               <div key={index}>
@@ -491,9 +507,9 @@ const CreateQuiz = ({
             className={styles.selectBtn}
             style={{
              
-              position: "absolute",
-              bottom: "70px",
-              left: "86px",
+              // position: "absolute",
+              // bottom: "70px",
+              // left: "86px",
             }}
           >
             <div
@@ -513,7 +529,7 @@ const CreateQuiz = ({
           <p
             style={{
               width: "300px",
-              margin: "95px auto 0 auto",
+              margin: "15px auto 0 auto",
               color: "red",
               fontFamily: "Poppins , sans-sarif",
               textAlign: "center",

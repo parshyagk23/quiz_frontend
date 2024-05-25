@@ -1,0 +1,81 @@
+.queno {
+    display: flex;
+    justify-content: space-between;
+}
+.queno h3:first-child{
+    font-family: "Poppins",sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 60px;
+    text-align: left;
+    color: #474444;
+}
+.queno h3:last-child{
+    font-family: "Poppins",sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 60px;
+    text-align: left;
+    
+}
+.question{
+    width: 60vw;
+    height: 60px;
+    margin: 0px auto;
+}
+.question h1{
+    font-family: "Poppins",sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 40px;
+    text-align: left;
+    color:#474444;
+}
+.options{
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap:20px;
+     height: 260px;
+}
+.options div{
+    width: 240px;
+    padding:0 40px;
+    margin: 0 auto;
+    height: 112px;
+    margin-top: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.options div p{
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 112px;
+    text-align: center;
+
+}
+.nextbtn{
+    width: 320px;
+    margin: 0 auto;
+    height: 56px;
+    border-radius: 10px;
+    background: #60B84B;
+    cursor: pointer;
+    margin-top: 30px;
+}
+.nextbtn button{
+    all: unset;
+    width: 300px;
+    font-family: "Poppins",sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 54px;
+    text-align: center;
+    color:#FFF;
+    text-transform: uppercase;
+}
+.options img{
+  
+    border-radius: 10px;
+}
+
