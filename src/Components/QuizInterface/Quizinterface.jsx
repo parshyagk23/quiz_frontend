@@ -43,7 +43,7 @@ useEffect(() => {
   }, [count]);
 
   useEffect(() => {
-    // setCount(QuizData?.timer);
+    setCount(QuizData?.timer);
   }, [CurrentQuestion,QuizData?.timer]);
 
   const handleIsSelectedoptionTrue = async (quizId, questionindex) => {
