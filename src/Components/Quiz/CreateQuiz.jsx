@@ -264,8 +264,6 @@ const CreateQuiz = ({
 
     });
     
-    console.log(error)
-    console.log(isError)
     if(isError) return
     const newQuizId = generateQuizId();
     setQuizId(newQuizId);
