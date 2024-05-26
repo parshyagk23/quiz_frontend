@@ -3,6 +3,7 @@ import Navbar from '../../Components/Navbar/Navbar'
 import styles from './../../Components/Dashboard/dashboard.module.css'
 import Analytics from '../../Components/Quiz Analysis/Analytics'
 import Dashboard from '../../Components/Dashboard/Dashboard'
+
 const DashBoardPage = () => {
   const [Analysis,setAnalysis]= useState(false)
   const [OpenDashbord,setDashboard]= useState(false)

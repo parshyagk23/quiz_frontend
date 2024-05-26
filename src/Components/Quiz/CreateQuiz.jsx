@@ -39,12 +39,13 @@ const CreateQuiz = ({
   const [AddOptions, setAddOptions] = useState([1, 2]);
   const [error, setError] = useState(false);
   const [QuizId, setQuizId] = useState("");
+  const [timer ,setTimer] = useState(0)
 
   const [Quiz, setQuiz] = useState([
     {
       Question: "",
       OptionType: CheckOptionType,
-      timer: 0,
+      
       Options: [
         {
           text: "",
@@ -61,6 +62,7 @@ const CreateQuiz = ({
       ],
       AttemptedQuestion:0,
       CorrectAns:0,
+      WrongAns:0
     },
 
   ]);
@@ -76,7 +78,7 @@ const CreateQuiz = ({
     const QuizVal = {
       Question: "",
       OptionType: CheckOptionType,
-      timer: 0,
+      
       Options: [
         {
           text: "",
@@ -93,6 +95,7 @@ const CreateQuiz = ({
       ],
       AttemptedQuestion:0,
       CorrectAns:0,
+      WrongAns:0
     };
     setQuiz([...Quiz, QuizVal]);
     setSlides([...Slides, addslide]);
@@ -154,12 +157,7 @@ const CreateQuiz = ({
     setQuiz(updateQuiz);
   };
 
-  const handleTimer = (val) => {
   
-    const updateQuiz = [...Quiz];
-    updateQuiz[CurrentSlides] = { ...updateQuiz[CurrentSlides], timer: val };
-    setQuiz(updateQuiz); 
-  };
 
   const HandleOptionCheck = (e, Optionindex) => {
     const updateQuiz = [...Quiz];
@@ -193,6 +191,9 @@ const CreateQuiz = ({
   };
   
   const handleCreateQuiz = async () => {
+    if(error) {
+      setError(false)
+    }
     let isError;
     if (!QuizName || !QuizType) {
       setError(true);
@@ -200,8 +201,9 @@ const CreateQuiz = ({
       return;
     }
     Quiz.map( (data) => {
-      const { Question, OptionType, Options, timer } = data;
-      if (!Question || !OptionType || timer==undefined) {
+      const { Question, OptionType, Options } = data;
+
+      if (!Question || !OptionType) {
         setError(true);
         isError=true
         return;
@@ -210,6 +212,7 @@ const CreateQuiz = ({
       Options.map((data) => {
         const { text, imageUrl, isCorrectAns, PollCount } = data;
         if(OptionType === "Q&A" && !isCorrectAns)  count++;
+        
         if(count=== Options.length) {
           setError(true)
           isError=true
@@ -260,13 +263,16 @@ const CreateQuiz = ({
       });
 
     });
+    
+    console.log(error)
+    console.log(isError)
     if(isError) return
     const newQuizId = generateQuizId();
     setQuizId(newQuizId);
    
     let res;
     if(!isError){
-       res =await PostQuiz(QuizName,QuizType,newQuizId,Quiz);
+       res =await PostQuiz(QuizName,QuizType,newQuizId,Quiz,timer);
 
     }
     if(res?.message==="Quiz create successfully")
@@ -492,12 +498,12 @@ const CreateQuiz = ({
             <div
               key={index}
               style={
-                val.value === Quiz[CurrentSlides]?.timer
+                val.value === timer
                   ? { color: "white", background: "red", cursor: "pointer" }
                   : {}
               }
               
-              onClick={() => handleTimer(val.value)}
+              onClick={() =>  setTimer(val.value)}
             >
               <h2>{val.text}</h2>
             </div>

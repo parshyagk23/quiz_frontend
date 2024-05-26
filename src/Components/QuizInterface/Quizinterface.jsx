@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import styles from "./Quizinterface.module.css";
 import { getCorrectAns } from "../../Apis/Quiz";
+import CongratsQuizInterface from "./CongratsQuizInterface";
 const Quizinterface = ({ QuizData }) => {
   const customStyles = {
     content: {
@@ -18,47 +19,69 @@ const Quizinterface = ({ QuizData }) => {
     },
   };
   const optionType = ["Text", "Image URL", "Text & Image URL"];
-  const [count, setCount] = useState(0);
   const [CurrentQuestion, setCurrentQuestion] = useState(1);
-  const [SelectedOption,setSelectedOption] = useState()
-
-  const setTimerCountDown = (count) => {
-    if(count===0){ 
-      handleIsSelectedoptionTrue(QuizData._id,CurrentQuestion-1)
-      setCurrentQuestion((prev)=> prev+1)
-
-    }
+  const [count, setCount]= useState(QuizData?.timer || 0);
+  const [SelectedOption, setSelectedOption] = useState();
+  const [OpenContgrats, setOpenContgrats] = useState(false);
+  const [CorrectAns, setCorrectAns] = useState(0);
+useEffect(() => {
+    let timer;
     if (count > 0) {
-      const timer = setInterval(() => {
+      timer = setInterval(() => {
         setCount((prevCount) => prevCount - 1);
       }, 1000);
-      return () => clearInterval(timer);
-    }
-  };
-  
-  const handleIsSelectedoptionTrue = async(quizId,questionindex)=>{
-    setCurrentQuestion((prev)=>prev+1)
-    let res;
-    if(SelectedOption !== undefined){
-      res= await getCorrectAns(quizId,questionindex,SelectedOption)
-      setSelectedOption()
+    } else if (count === 0) {
+      if (CurrentQuestion > QuizData?.Questions?.length) {
+        setOpenContgrats(true);
+        return;
+      }
+      handleIsSelectedoptionTrue(QuizData?._id, CurrentQuestion - 1);
+      setCount()
     }
 
-  }
+    return () => clearInterval(timer);
+  }, [count]);
+
+  useEffect(() => {
+    // setCount(QuizData?.timer);
+  }, [CurrentQuestion,QuizData?.timer]);
+
+  const handleIsSelectedoptionTrue = async (quizId, questionindex) => {
+   
+    let res = await getCorrectAns(quizId, questionindex, SelectedOption);
+    setSelectedOption();
+
+    if (res?.QuizAns) {
+      setCorrectAns((prev) => prev + 1);
+    }
+    setCurrentQuestion((prev) => prev + 1);
+
+    if (CurrentQuestion === QuizData?.Questions?.length) {
+      setOpenContgrats(true);
+      return;
+    }
+  };
+
   return (
     <div>
-      <Modal isOpen={true} style={customStyles}>
+      <Modal
+        isOpen={!OpenContgrats}
+        style={customStyles}
+        overlayClassName={styles.overlayclass}
+      >
         {QuizData?.Questions?.map((data, index) => (
           <div key={index}>
             {index + 1 === CurrentQuestion && (
               <section>
                 <div className={styles.queno}>
-                  <h3 >
+                  <h3>
                     {CurrentQuestion}/{QuizData?.Questions.length}
                   </h3>
                   {data?.timer !== 0 ? (
-                    <h3 style={{color: "#D60000"}} > 00:{setTimerCountDown(data.timer)}s</h3>
-                  ):(<div></div>)}
+                    <h3 style={{ color: "#D60000" }}>00:{count}s</h3>
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
                 <div className={styles.question}>
                   <h1>{data.Question}</h1>
@@ -66,12 +89,15 @@ const Quizinterface = ({ QuizData }) => {
                 <div className={styles.options}>
                   {data?.Options?.map((val, index) => (
                     <div
-                    onClick={()=>setSelectedOption(index)}
-                    key={index}
+                      onClick={() => setSelectedOption(index)}
+                      key={index}
                       style={
-                      SelectedOption===index
-                          ? {background: "#F0F0F0",border:'5px solid #5076FF'  }
-                          : {background: "#F0F0F0"}
+                        SelectedOption === index
+                          ? {
+                              background: "#F0F0F0",
+                              border: "5px solid #5076FF",
+                            }
+                          : { background: "#F0F0F0" }
                       }
                     >
                       {data.OptionType === optionType[0] && <p>{val.text}</p>}
@@ -84,7 +110,7 @@ const Quizinterface = ({ QuizData }) => {
                         />
                       )}
                       {data?.OptionType === optionType[2] && (
-                        <div style={{display: "flex", gap: "10px"}}>
+                        <div style={{ display: "flex", gap: "10px" ,justifyContent:'center'}}>
                           <p>{val?.text}</p>
                           <img
                             width="136px"
@@ -97,14 +123,30 @@ const Quizinterface = ({ QuizData }) => {
                     </div>
                   ))}
                 </div>
-                <div className={styles.nextbtn} onClick={()=>handleIsSelectedoptionTrue(QuizData._id,index)} >
-                  <button>{QuizData?.Questions?.length === CurrentQuestion ?"submit":"next"}</button>
+                <div
+                  className={styles.nextbtn}
+                  onClick={() =>
+                    handleIsSelectedoptionTrue(QuizData._id, index)
+                  }
+                >
+                  <button>
+                    {QuizData?.Questions?.length === CurrentQuestion
+                      ? "submit"
+                      : "next"}
+                  </button>
                 </div>
               </section>
             )}
           </div>
         ))}
       </Modal>
+      {OpenContgrats && (
+        <CongratsQuizInterface
+          QuizType={QuizData?.QuizType}
+          QuizLen={QuizData.Questions.length}
+          CorrectAns={CorrectAns}
+        />
+      )}
     </div>
   );
 };

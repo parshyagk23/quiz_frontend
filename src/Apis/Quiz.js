@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 const QUIZURL = import.meta.env.VITE_REACT_APP_QUIZ_URL
 
-export const PostQuiz = async (QuizName,QuizType,QuizId,Questions) => {
+export const PostQuiz = async (QuizName,QuizType,QuizId,Questions,timer) => {
     try {
         const  Impressions=0;
         const token = Cookies.get('token')
@@ -10,7 +10,7 @@ export const PostQuiz = async (QuizName,QuizType,QuizId,Questions) => {
         const reqUrl = `${QUIZURL}/create`;
        
         const responce = await axios.post(reqUrl,{    QuizName,QuizType,QuizId,Questions,
-                                                    Impressions
+                                                    Impressions,timer
                                                 });
         
         return responce.data;

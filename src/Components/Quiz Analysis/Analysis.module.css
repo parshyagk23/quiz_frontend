@@ -77,6 +77,8 @@ svg{
     width: 828px;
     margin: 0 auto;
     margin-top: 20px;
+    overflow-y: scroll;
+    height: calc(-71px + 80vh);
 }
 .question h1{
     font-family: "Poppins",sans-serif;
