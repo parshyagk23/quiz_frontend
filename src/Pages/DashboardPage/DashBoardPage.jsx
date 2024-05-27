@@ -3,7 +3,7 @@ import Navbar from '../../Components/Navbar/Navbar'
 import styles from './../../Components/Dashboard/dashboard.module.css'
 import Analytics from '../../Components/Quiz Analysis/Analytics'
 import Dashboard from '../../Components/Dashboard/Dashboard'
-
+import { QuizContext } from '../../useContext/useContext'
 import { getQuizByUserId } from "../../Apis/Quiz";
 
 const DashBoardPage = () => {
@@ -33,9 +33,11 @@ const DashBoardPage = () => {
 
   return (
     <main  className={styles.dashboard}>
+    <QuizContext.Provider value={{Analysis,setAnalysis,OpenDeleteQuiz,setopenDeleteQuiz,loading,QuizAnalysis,openQueAnalysis,setopenQueAnalysis}} >
       <Navbar setAnalysis={setAnalysis} setDashboard={setDashboard} setopenQueAnalysis={setopenQueAnalysis} />
-      {Analysis && <Analytics OpenDeleteQuiz= {OpenDeleteQuiz} setopenDeleteQuiz={setopenDeleteQuiz} loading={loading} QuizAnalysis={QuizAnalysis} Analysis={Analysis} openQueAnalysis={openQueAnalysis} setopenQueAnalysis={setopenQueAnalysis}/>}
+      {Analysis && <Analytics QuizAnalysis={QuizAnalysis} />}
       {OpenDashbord&&<Dashboard/>}
+      </QuizContext.Provider>
       
     </main>
   )

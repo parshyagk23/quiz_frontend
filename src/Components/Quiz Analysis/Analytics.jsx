@@ -1,18 +1,22 @@
-import React, {  useState } from "react";
+import React, {  useState,useContext } from "react";
 import styles from "./Analysis.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import QuestionWiseAnalyasis from "./QuestionWiseAnalyasis";
 import DeleteQuiz from "./DeleteQuiz";
 import CreateQuiz from "../Quiz/CreateQuiz";
+import { QuizContext } from "../../useContext/useContext";
 
-const Analytics = ({ loading,openQueAnalysis,setopenQueAnalysis,Analysis,QuizAnalysis ,OpenDeleteQuiz,setopenDeleteQuiz}) => {
+const Analytics = ({QuizAnalysis}) => {
  
   const [QesAnalysis, setQesAnalysis] = useState();
   const [index,setIndex]= useState()
   const [id, setId] = useState()
   const [OpenCreateQuiz,setOpenCreateQuiz]= useState(false)
   const [QuizData, setQuizData]= useState()
+
+  const {loading,openQueAnalysis,setopenQueAnalysis,Analysis,OpenDeleteQuiz,setopenDeleteQuiz} = useContext(QuizContext)
+
   const getQuizCreationDate = (isoDate )=>{
     
     const day = isoDate.slice(8,10)
