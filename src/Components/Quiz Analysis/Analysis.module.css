@@ -113,3 +113,56 @@ svg{
 
 
 }
+/* delete quiz */
+.delete div{
+    Width:502px;
+    Height:118px;
+    margin:  0 auto;
+}
+.delete div h1{
+    font-family: "Poppins",sans-serif;
+    font-size: 39px;
+    font-weight: 600;
+    line-height: 58.5px;
+    text-align: center;
+    color: #474444;
+    
+}
+.deletebtn{
+     display:flex;
+     gap:20px;
+     justify-content:center;
+     align-items: center;
+}
+.deletebtn div{
+    width: 240px;
+    height: 43px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.deletebtn div:nth-child(1){
+    background: #FF4B4B;
+}
+.deletebtn div:nth-child(2){
+    background: #FFF;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+}
+
+
+.deletebtn div button{
+    all: unset;
+    width: 240px;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 45px;
+    text-align: center;
+
+}
+
+.deletebtn div:first-child button{
+    color: #FFF;
+}
+.deletebtn div:last-child button{
+    color: #474444;
+}

@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import Modal from "react-modal";
 import styles from "./quiz.module.css";
 import { PostQuiz } from "../../Apis/Quiz";
@@ -8,7 +8,9 @@ const CreateQuiz = ({
   QuizType,
   setOpenCreateQuiz,
   OpenCreateQuiz,
+  QuizData
 }) => {
+ 
   const customStyles = {
     content: {
       width: "60vw",
@@ -33,39 +35,83 @@ const CreateQuiz = ({
   ];
 
   const [CheckOptionType, setCheckOptionType] = useState("Text");
-  const [Slides, setSlides] = useState([1]);
+  const [Slides, setSlides] = useState();
   const [CurrentSlides, setCurrentSlides] = useState(0);
   const [openShareLink,setopenShareLink]= useState(false)
   const [AddOptions, setAddOptions] = useState([1, 2]);
   const [error, setError] = useState(false);
   const [QuizId, setQuizId] = useState("");
-  const [timer ,setTimer] = useState(0)
+  const [timer ,setTimer] = useState( QuizData?. timer || 0)
+  const [Quiz, setQuiz] = useState([ {
+    Question: "",
+    OptionType: CheckOptionType,
+    Options: [
+      {
+        text: "",
+        imageUrl: "",
+        isCorrectAns: false,
+        PollCount: 0,
+      },
+      {
+        text: "",
+        imageUrl: "",
+        isCorrectAns: false,
+        PollCount: 0,
+      },
+    ],
+    AttemptedQuestion: 0,
+    CorrectAns: 0,
+    WrongAns: 0,
+  }]);
 
-  const [Quiz, setQuiz] = useState([
-    {
-      Question: "",
-      OptionType: CheckOptionType,
-      
-      Options: [
-        {
-          text: "",
-          imageUrl: "",
-          isCorrectAns: false,
-          PollCount: 0,
-        },
-        {
-          text: "",
-          imageUrl: "",
-          isCorrectAns: false,
-          PollCount: 0,
-        },
-      ],
-      AttemptedQuestion:0,
-      CorrectAns:0,
-      WrongAns:0
-    },
-
-  ]);
+  const EditQUizUpdate =()=>{
+      let initialQuiz = [];
+      let initialSlides = [];
+      if (QuizData) {
+        QuizData.Questions.forEach((data, index) => {
+          initialSlides.push(index + 1);
+          initialQuiz.push({
+            Question: data.Question,
+            OptionType: data.OptionType,
+            Options: data.Options,
+            AttemptedQuestion: data.AttemptedQuestion,
+            CorrectAns: data.CorrectAns,
+            WrongAns: data.WrongAns,
+          });
+        });
+      } else {
+        initialSlides.push(1);
+        initialQuiz.push(
+          {
+          Question: "",
+          OptionType: CheckOptionType,
+          Options: [
+            {
+              text: "",
+              imageUrl: "",
+              isCorrectAns: false,
+              PollCount: 0,
+            },
+            {
+              text: "",
+              imageUrl: "",
+              isCorrectAns: false,
+              PollCount: 0,
+            },
+          ],
+          AttemptedQuestion: 0,
+          CorrectAns: 0,
+          WrongAns: 0,
+        });
+      }
+      setSlides(initialSlides);
+      setQuiz(initialQuiz);
+    
+  }
+ 
+  useEffect(() => {
+  EditQUizUpdate()
+  },[])
 
   const CorrectAnsStyle = {
     background: "#60B84B",
@@ -73,8 +119,8 @@ const CreateQuiz = ({
   };
 
   const handleAddSlide = () => {
-    if (Slides.length >= 5) return;
-    const addslide = Slides.length + 1;
+    if (Slides?.length >= 5) return;
+    const addslide = Slides?.length + 1;
     const QuizVal = {
       Question: "",
       OptionType: CheckOptionType,
@@ -102,8 +148,8 @@ const CreateQuiz = ({
   };
 
   const handleremoveSlide = (val) => {
-    if (Slides.length == 1) return;
-    const updateslide = Slides.filter((slide) => slide != val);
+    if (Slides?.length == 1) return;
+    const updateslide = Slides?.filter((slide) => slide != val);
     const updateQuiz = Quiz.filter((quiz, index) => index != val - 1);
     setQuiz(updateQuiz);
     setSlides(updateslide);
@@ -157,7 +203,6 @@ const CreateQuiz = ({
     setQuiz(updateQuiz);
   };
 
-  
 
   const HandleOptionCheck = (e, Optionindex) => {
     const updateQuiz = [...Quiz];
@@ -306,7 +351,7 @@ const CreateQuiz = ({
         </div>
 
         <div className={styles.slides}>
-          {Slides.map((val, index) => (
+          {Slides?.map((val, index) => (
             <div
               style={
                 index === CurrentSlides ? { border: "1px solid black" } : {}
@@ -318,7 +363,7 @@ const CreateQuiz = ({
               }}
             >
               <span>{val}</span>
-              {index === Slides.length - 1 && index !== 0 && (
+              {index === Slides?.length - 1 && index !== 0 && (
                 <span
                   onClick={(e) => {
                     e.stopPropagation();
@@ -341,7 +386,7 @@ const CreateQuiz = ({
               boxShadow: "none",
             }}
           >
-            {Slides.length !== 5 && (
+            {Slides?.length !== 5 && (
               <span
                 style={{
                   fontFamily: "Poppins sans-serif",
@@ -509,12 +554,7 @@ const CreateQuiz = ({
         </div>}
           <div
             className={styles.selectBtn}
-            style={{
-             
-              // position: "absolute",
-              // bottom: "70px",
-              // left: "86px",
-            }}
+
           >
             <div
               onClick={() => {
@@ -523,9 +563,13 @@ const CreateQuiz = ({
             >
               <button>Cancel</button>
             </div>
+            {!QuizData?
             <div onClick={handleCreateQuiz}>
               <button>Create Quiz</button>
-            </div>
+            </div>:
+            <div onClick={()=>console.log('update quiz')}>
+              <button>Update Quiz</button>
+            </div>}
           </div>
         </section>
 

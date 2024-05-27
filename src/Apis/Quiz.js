@@ -52,3 +52,12 @@ export const getCorrectAns = async (quizid,questionindex,optionindex) => {
         return error.response;
     }
   };
+export const DeleteQuizById = async (quizid) => {
+    try {
+        const reqUrl = `${QUIZURL}/delete/${quizid}`
+        const responce = await axios.delete(reqUrl);
+        return responce.data;
+    } catch (error) {
+        return error.response;
+    }
+  };

@@ -7,7 +7,6 @@ const SelectQuiz = ({setopenQuiz,openQuiz}) => {
     const customStyles = {
         content: {
           width: "40vw",
-          height: "39vh",
           top: "50%",
           left: "50%",
           right: "auto",
