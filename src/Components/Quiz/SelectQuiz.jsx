@@ -72,7 +72,6 @@ const SelectQuiz = ({setopenQuiz,openQuiz}) => {
       </Modal>
     {OpenCreateQuiz &&   <CreateQuiz  QuizName={Quiz.QuizName} 
                                       QuizType={Quiz.QuizType}
-                                     
                                       setOpenCreateQuiz={setOpenCreateQuiz}
                                       OpenCreateQuiz={OpenCreateQuiz}
                                        />}

@@ -19,6 +19,22 @@ export const PostQuiz = async (QuizName,QuizType,QuizId,Questions,timer) => {
     }
   };
 
+export const UpdatedQuiz = async (id,QuizName,QuizType,QuizId,Questions,timer,Impressions) => {
+    try {
+        const token = Cookies.get('token')
+        axios.defaults.headers.common["Authorization"]=token
+        const reqUrl = `${QUIZURL}/update/${id}`;
+       
+        const responce = await axios.put(reqUrl,{    QuizName,QuizType,QuizId,Questions,
+                                                    Impressions,timer
+                                                });
+        console.log("update")
+        return responce.data;
+    } catch (error) {
+        return error.response;
+    }
+  };
+
 export const getQuizByUserId = async () => {
     try {
         const token = Cookies.get('token')
@@ -52,6 +68,7 @@ export const getCorrectAns = async (quizid,questionindex,optionindex) => {
         return error.response;
     }
   };
+
 export const DeleteQuizById = async (quizid) => {
     try {
         const reqUrl = `${QUIZURL}/delete/${quizid}`

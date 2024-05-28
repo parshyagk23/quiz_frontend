@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import styles from "./quiz.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const Sharequiz = ({ QuizId, openShareLink, setopenShareLink }) => {
+const Sharequiz = ({ QuizId, openShareLink, setopenShareLink,setOpenCreateQuiz }) => {
   const customStyles = {
     content: {
       width: "76vw",
@@ -21,12 +21,13 @@ const Sharequiz = ({ QuizId, openShareLink, setopenShareLink }) => {
   };
   const handleShareQuizLink = () => {
     navigator.clipboard.writeText(
-      `http://localhost:5173/quiz/${QuizId}`
+      `quiz-frontend-dun.vercel.app/quiz/${QuizId}`
     );
     toast.success("Link copied to Clipboard", { position: "top-right" });
   };
   const handleRemove = () => {
     setopenShareLink(false);
+    setOpenCreateQuiz(false)
   };
   return (
     <div>
@@ -40,7 +41,7 @@ const Sharequiz = ({ QuizId, openShareLink, setopenShareLink }) => {
             <h1>Congrats your Quiz is Published!</h1>
           </div>
           <div>
-            <h2>{`http://localhost:5173/quiz/${QuizId}`}</h2>
+            <h2>{`quiz-frontend-dun.vercel.app/quiz/${QuizId}`}</h2>
           </div>
           <div onClick={handleShareQuizLink}>
             <button>Share</button>

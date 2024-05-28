@@ -13,12 +13,12 @@ const DashBoardPage = () => {
   const [loading,setLoading]= useState(false)
   const [QuizAnalysis, setQuizAnalysis] = useState();
   const [OpenDeleteQuiz,setopenDeleteQuiz] = useState(false)
-  
+  const [OpenCreateQuiz,setOpenCreateQuiz]= useState(false)
   useEffect(() => {
     setTimeout(() => {
       getQuizAnalysisData();
     }, 1000);
-  }, [openQueAnalysis,OpenDeleteQuiz]);
+  }, [OpenDashbord,openQueAnalysis,OpenDeleteQuiz,OpenCreateQuiz]);
 
   const getQuizAnalysisData = async () => {
     setLoading(true)
@@ -33,7 +33,7 @@ const DashBoardPage = () => {
 
   return (
     <main  className={styles.dashboard}>
-    <QuizContext.Provider value={{Analysis,setAnalysis,OpenDeleteQuiz,setopenDeleteQuiz,loading,QuizAnalysis,openQueAnalysis,setopenQueAnalysis}} >
+    <QuizContext.Provider value={{ OpenCreateQuiz,setOpenCreateQuiz, Analysis,setAnalysis,OpenDeleteQuiz,setopenDeleteQuiz,loading,setLoading,QuizAnalysis,openQueAnalysis,setopenQueAnalysis}} >
       <Navbar setAnalysis={setAnalysis} setDashboard={setDashboard} setopenQueAnalysis={setopenQueAnalysis} />
       {Analysis && <Analytics QuizAnalysis={QuizAnalysis} />}
       {OpenDashbord&&<Dashboard/>}

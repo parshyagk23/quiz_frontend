@@ -1,16 +1,15 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import styles from "./quiz.module.css";
-import { PostQuiz } from "../../Apis/Quiz";
+import { PostQuiz, UpdatedQuiz } from "../../Apis/Quiz";
 import Sharequiz from "./Sharequiz";
 const CreateQuiz = ({
   QuizName,
   QuizType,
   setOpenCreateQuiz,
   OpenCreateQuiz,
-  QuizData
+  QuizData,
 }) => {
- 
   const customStyles = {
     content: {
       width: "60vw",
@@ -23,8 +22,7 @@ const CreateQuiz = ({
       borderRadius: "15px",
       background: "#FFF",
       boxShadow: " rgba(0, 0, 0, 0.15) 0px 5px 15px",
-      zIndex:'1'
-      
+      zIndex: "1",
     },
   };
   const optionType = ["Text", "Image URL", "Text & Image URL"];
@@ -37,94 +35,15 @@ const CreateQuiz = ({
   const [CheckOptionType, setCheckOptionType] = useState("Text");
   const [Slides, setSlides] = useState();
   const [CurrentSlides, setCurrentSlides] = useState(0);
-  const [openShareLink,setopenShareLink]= useState(false)
+  const [openShareLink, setopenShareLink] = useState(false);
   const [AddOptions, setAddOptions] = useState([1, 2]);
   const [error, setError] = useState(false);
   const [QuizId, setQuizId] = useState("");
-  const [timer ,setTimer] = useState( QuizData?. timer || 0)
-  const [Quiz, setQuiz] = useState([ {
-    Question: "",
-    OptionType: CheckOptionType,
-    Options: [
-      {
-        text: "",
-        imageUrl: "",
-        isCorrectAns: false,
-        PollCount: 0,
-      },
-      {
-        text: "",
-        imageUrl: "",
-        isCorrectAns: false,
-        PollCount: 0,
-      },
-    ],
-    AttemptedQuestion: 0,
-    CorrectAns: 0,
-    WrongAns: 0,
-  }]);
-
-  const EditQUizUpdate =()=>{
-      let initialQuiz = [];
-      let initialSlides = [];
-      if (QuizData) {
-        QuizData.Questions.forEach((data, index) => {
-          initialSlides.push(index + 1);
-          initialQuiz.push({
-            Question: data.Question,
-            OptionType: data.OptionType,
-            Options: data.Options,
-            AttemptedQuestion: data.AttemptedQuestion,
-            CorrectAns: data.CorrectAns,
-            WrongAns: data.WrongAns,
-          });
-        });
-      } else {
-        initialSlides.push(1);
-        initialQuiz.push(
-          {
-          Question: "",
-          OptionType: CheckOptionType,
-          Options: [
-            {
-              text: "",
-              imageUrl: "",
-              isCorrectAns: false,
-              PollCount: 0,
-            },
-            {
-              text: "",
-              imageUrl: "",
-              isCorrectAns: false,
-              PollCount: 0,
-            },
-          ],
-          AttemptedQuestion: 0,
-          CorrectAns: 0,
-          WrongAns: 0,
-        });
-      }
-      setSlides(initialSlides);
-      setQuiz(initialQuiz);
-    
-  }
- 
-  useEffect(() => {
-  EditQUizUpdate()
-  },[])
-
-  const CorrectAnsStyle = {
-    background: "#60B84B",
-    color: "#fff",
-  };
-
-  const handleAddSlide = () => {
-    if (Slides?.length >= 5) return;
-    const addslide = Slides?.length + 1;
-    const QuizVal = {
+  const [timer, setTimer] = useState(QuizData?.timer || 0);
+  const [Quiz, setQuiz] = useState([
+    {
       Question: "",
       OptionType: CheckOptionType,
-      
       Options: [
         {
           text: "",
@@ -139,9 +58,88 @@ const CreateQuiz = ({
           PollCount: 0,
         },
       ],
-      AttemptedQuestion:0,
-      CorrectAns:0,
-      WrongAns:0
+      AttemptedQuestion: 0,
+      CorrectAns: 0,
+      WrongAns: 0,
+    },
+  ]);
+
+  const EditQUizUpdate = () => {
+    let initialQuiz = [];
+    let initialSlides = [];
+    if (QuizData) {
+      QuizData.Questions.forEach((data, index) => {
+        initialSlides.push(index + 1);
+        initialQuiz.push({
+          Question: data.Question,
+          OptionType: data.OptionType,
+          Options: data.Options,
+          AttemptedQuestion: data.AttemptedQuestion,
+          CorrectAns: data.CorrectAns,
+          WrongAns: data.WrongAns,
+        });
+      });
+    } else {
+      initialSlides.push(1);
+      initialQuiz.push({
+        Question: "",
+        OptionType: CheckOptionType,
+        Options: [
+          {
+            text: "",
+            imageUrl: "",
+            isCorrectAns: false,
+            PollCount: 0,
+          },
+          {
+            text: "",
+            imageUrl: "",
+            isCorrectAns: false,
+            PollCount: 0,
+          },
+        ],
+        AttemptedQuestion: 0,
+        CorrectAns: 0,
+        WrongAns: 0,
+      });
+    }
+    setSlides(initialSlides);
+    setQuiz(initialQuiz);
+  };
+
+  useEffect(() => {
+    EditQUizUpdate();
+  }, [QuizData]);
+
+  const CorrectAnsStyle = {
+    background: "#60B84B",
+    color: "#fff",
+  };
+
+  const handleAddSlide = () => {
+    if (Slides?.length >= 5) return;
+    const addslide = Slides?.length + 1;
+    const QuizVal = {
+      Question: "",
+      OptionType: CheckOptionType,
+
+      Options: [
+        {
+          text: "",
+          imageUrl: "",
+          isCorrectAns: false,
+          PollCount: 0,
+        },
+        {
+          text: "",
+          imageUrl: "",
+          isCorrectAns: false,
+          PollCount: 0,
+        },
+      ],
+      AttemptedQuestion: 0,
+      CorrectAns: 0,
+      WrongAns: 0,
     };
     setQuiz([...Quiz, QuizVal]);
     setSlides([...Slides, addslide]);
@@ -203,7 +201,6 @@ const CreateQuiz = ({
     setQuiz(updateQuiz);
   };
 
-
   const HandleOptionCheck = (e, Optionindex) => {
     const updateQuiz = [...Quiz];
     updateQuiz[CurrentSlides]?.Options?.map((data, index) => {
@@ -226,105 +223,125 @@ const CreateQuiz = ({
   };
 
   const generateQuizId = () => {
-    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
+    const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
     const characterLength = characters.length;
     for (let i = 0; i < 24; i++) {
       result += characters.charAt(Math.floor(Math.random() * characterLength));
     }
     return result;
   };
-  
   const handleCreateQuiz = async () => {
-    if(error) {
-      setError(false)
+    if (error) {
+      setError(false);
     }
     let isError;
-    if (!QuizName || !QuizType) {
+    if(QuizData){
+      if(!QuizData?.QuizName || !QuizData?.QuizType){
+        setError(true);
+        isError = true;
+        return;
+      }
+    }
+    else if (!QuizName || !QuizType ) {
       setError(true);
-      isError=true
+      isError = true;
       return;
     }
-    Quiz.map( (data) => {
+    
+    Quiz.map((data) => {
       const { Question, OptionType, Options } = data;
 
       if (!Question || !OptionType) {
         setError(true);
-        isError=true
+        isError = true;
         return;
       }
-      let count =0;
+      let count = 0;
       Options.map((data) => {
         const { text, imageUrl, isCorrectAns, PollCount } = data;
-        if(OptionType === "Q&A" && !isCorrectAns)  count++;
-        
-        if(count=== Options.length) {
-          setError(true)
-          isError=true
+        if (OptionType === "Q&A" && !isCorrectAns) count++;
+
+        if (count === Options.length) {
+          setError(true);
+          isError = true;
           return;
         }
         if (OptionType === "Q&A") {
           if (OptionType === optionType[0]) {
             if (text === "" || isCorrectAns == undefined) {
               setError(true);
-              isError=true
+              isError = true;
               return;
             }
           } else if (OptionType === optionType[1]) {
             if (imageUrl === "" || isCorrectAns == undefined) {
               setError(true);
-              isError=true
+              isError = true;
               return;
             }
           } else if (OptionType === optionType[2]) {
             if (text === "" || imageUrl === "" || isCorrectAns == undefined) {
               setError(true);
-              isError=true
+              isError = true;
               return;
             }
           }
-        } else if(OptionType === "Poll") {
-          console.log(OptionType)
+        } else if (OptionType === "Poll") {
+          console.log(OptionType);
           if (OptionType === optionType[0]) {
             if (text === "") {
               setError(true);
-              isError=true
+              isError = true;
               return;
             }
           } else if (OptionType === optionType[1]) {
             if (imageUrl === "") {
               setError(true);
-              isError=true
+              isError = true;
               return;
             }
           } else if (OptionType === optionType[2]) {
             if (text === "" || imageUrl === "") {
               setError(true);
-              isError=true
+              isError = true;
               return;
             }
           }
         }
       });
-
     });
-    
-    if(isError) return
+   
+    if (isError) return;
+    if (QuizData) {
+      let res;
+      if (!isError) {
+        res = await UpdatedQuiz(
+          QuizData?._id,
+          QuizData?.QuizName,
+          QuizData?.QuizType,
+          QuizData?.QuizId,
+          Quiz,
+          timer,
+          QuizData?.Impressions
+        );
+      }
+      if (res?.message === "Quiz updated successfully") {
+        setopenShareLink(true);
+      }
+      return;
+    }
     const newQuizId = generateQuizId();
     setQuizId(newQuizId);
-   
+
     let res;
-    if(!isError){
-       res =await PostQuiz(QuizName,QuizType,newQuizId,Quiz,timer);
-
+    if (!isError) {
+      res = await PostQuiz(QuizName, QuizType, newQuizId, Quiz, timer);
     }
-    if(res?.message==="Quiz create successfully")
-      {
-        setopenShareLink(true)
-
-      }
-   return
-    
+    if (res?.message === "Quiz create successfully") {
+      setopenShareLink(true);
+    }
+    return;
   };
   return (
     <>
@@ -436,7 +453,7 @@ const CreateQuiz = ({
           </div>
         </section>
 
-        <section style={{ marginLeft:'46px' , }} >
+        <section style={{ marginLeft: "46px" }}>
           <div className={styles.option}>
             {Quiz[CurrentSlides]?.Options?.map((val, index) => (
               <div key={index}>
@@ -444,7 +461,11 @@ const CreateQuiz = ({
                   type="radio"
                   name=""
                   id=""
-                  style={QuizType === "Poll" ? { display: "none" } : {}}
+                  style={
+                    QuizData?.QuizType || QuizType === "Poll"
+                      ? { display: "none" }
+                      : {}
+                  }
                   onChange={(e) => HandleOptionCheck(e, index)}
                   checked={val.isCorrectAns}
                 />
@@ -522,40 +543,42 @@ const CreateQuiz = ({
             )}
           </div>
 
+          {QuizData?.QuizType ||
+            (QuizType === "Q&A" && (
+              <div className={styles.timer}>
+                <h2
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "500",
+                    textAlign: "center",
+                    lineHeight: "30px",
+                    marginBottom: "10px",
+                    color: "#9f9f9f",
+                  }}
+                >
+                  Timer
+                </h2>
+                {Timer.map((val, index) => (
+                  <div
+                    key={index}
+                    style={
+                      val.value === timer
+                        ? {
+                            color: "white",
+                            background: "red",
+                            cursor: "pointer",
+                          }
+                        : {}
+                    }
+                    onClick={() => setTimer(val.value)}
+                  >
+                    <h2>{val.text}</h2>
+                  </div>
+                ))}
+              </div>
+            ))}
 
-          {QuizType==="Q&A" &&
-          <div className={styles.timer}>
-          <h2
-            style={{
-              fontSize: "20px",
-              fontWeight: "500",
-              textAlign: "center",
-              lineHeight: "30px",
-              marginBottom: "10px",
-              color: "#9f9f9f",
-            }}
-          >
-            Timer
-          </h2>
-          {Timer.map((val, index) => (
-            <div
-              key={index}
-              style={
-                val.value === timer
-                  ? { color: "white", background: "red", cursor: "pointer" }
-                  : {}
-              }
-              
-              onClick={() =>  setTimer(val.value)}
-            >
-              <h2>{val.text}</h2>
-            </div>
-          ))}
-        </div>}
-          <div
-            className={styles.selectBtn}
-
-          >
+          <div className={styles.selectBtn}>
             <div
               onClick={() => {
                 setOpenCreateQuiz(false);
@@ -563,13 +586,10 @@ const CreateQuiz = ({
             >
               <button>Cancel</button>
             </div>
-            {!QuizData?
+
             <div onClick={handleCreateQuiz}>
-              <button>Create Quiz</button>
-            </div>:
-            <div onClick={()=>console.log('update quiz')}>
-              <button>Update Quiz</button>
-            </div>}
+              <button>{QuizData ? "Update Quiz" : "Create Quiz"}</button>
+            </div>
           </div>
         </section>
 
@@ -586,8 +606,16 @@ const CreateQuiz = ({
             Fields can't be empty
           </p>
         )}
+
       </Modal>
-      {openShareLink&&<Sharequiz QuizId ={QuizId} openShareLink={openShareLink} setopenShareLink={setopenShareLink} />}
+      {openShareLink && (
+        <Sharequiz
+          QuizId={QuizData?QuizData?.QuizId:QuizId}
+          openShareLink={openShareLink}
+          setopenShareLink={setopenShareLink}
+          setOpenCreateQuiz={setOpenCreateQuiz}
+        />
+      )}
     </>
   );
 };

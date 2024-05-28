@@ -12,10 +12,9 @@ const Analytics = ({QuizAnalysis}) => {
   const [QesAnalysis, setQesAnalysis] = useState();
   const [index,setIndex]= useState()
   const [id, setId] = useState()
-  const [OpenCreateQuiz,setOpenCreateQuiz]= useState(false)
   const [QuizData, setQuizData]= useState()
 
-  const {loading,openQueAnalysis,setopenQueAnalysis,Analysis,OpenDeleteQuiz,setopenDeleteQuiz} = useContext(QuizContext)
+  const { OpenCreateQuiz,setOpenCreateQuiz,loading,openQueAnalysis,setopenQueAnalysis,Analysis,OpenDeleteQuiz,setopenDeleteQuiz} = useContext(QuizContext)
 
   const getQuizCreationDate = (isoDate )=>{
     
@@ -28,7 +27,7 @@ const Analytics = ({QuizAnalysis}) => {
   }
   const handleShareQuizLink = (QuizId) => {
     navigator.clipboard.writeText(
-      `http://localhost:5173/quiz/${QuizId}`
+      `quiz-frontend-dun.vercel.app/quiz/${QuizId}`
     );
     toast.success("Link copied to Clipboard", { position: "top-right" });
   };
@@ -78,6 +77,7 @@ const Analytics = ({QuizAnalysis}) => {
                onClick = {()=>{
                 setOpenCreateQuiz(true)
                 setQuizData(data)
+                
                }}
              >
                <path
