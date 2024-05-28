@@ -6,7 +6,8 @@ import CongratsQuizInterface from "./CongratsQuizInterface";
 const Quizinterface = ({ QuizData }) => {
   const customStyles = {
     content: {
-      width: "70vw",
+      width: window.innerWidth<=700?"100vw": "80vw",
+      height: window.innerWidth<=700?"100vh": "0",
       top: "50%",
       left: "50%",
       right: "auto",
@@ -48,6 +49,7 @@ useEffect(() => {
 
   const handleIsSelectedoptionTrue = async (quizId, questionindex) => {
    
+    
     let res = await getCorrectAns(quizId, questionindex, SelectedOption);
     setSelectedOption();
 

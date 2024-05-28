@@ -6,6 +6,7 @@
 .queno {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 .queno h3:first-child{
     font-family: "Poppins",sans-serif;
@@ -105,4 +106,31 @@
     width: 320px;
     height: 323px;
 
+}
+
+
+
+@media (max-width:700px){
+    .question{
+        width: 90vw;
+        height: 100px;
+        margin: 0px auto;
+    }
+    .question h1{
+        font-size: 21px;
+        line-height: 25px;
+    }
+    .options{
+        grid-template-columns: 1fr;
+        height: 375px;
+    }
+    .options div{
+        height: 70px;
+    }
+    .options div p{
+        line-height: 70px;
+    }
+    .options div img{
+        height: 90px;
+    }
 }

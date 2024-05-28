@@ -8,7 +8,6 @@ const Home = () => {
   const customStyles = {
     content: {
       width: "66vw",
-      height: "70vh",
       top: "50%",
       left: "50%",
       right: "auto",
