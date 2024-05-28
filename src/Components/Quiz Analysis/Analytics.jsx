@@ -38,7 +38,7 @@ const Analytics = ({QuizAnalysis}) => {
     <main className={styles.analysis}>
       <h1>Quiz Analysis</h1>
      {QuizAnalysis?.length==0?
-     <p style={{ width:'30vw', margin:'0 auto' }} >Not Data found</p>
+     <h1 style={{ width:'50vw', margin:'0 auto', color:'black' }} >Not Data found</h1>
      : <section style={{overflowY: "scroll" ,height: "calc(80vh - 71px)"}} >
      <table>
        <thead>
