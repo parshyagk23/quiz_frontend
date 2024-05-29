@@ -26,6 +26,7 @@ const Quizinterface = ({ QuizData }) => {
   const [OpenContgrats, setOpenContgrats] = useState(false);
   const [CorrectAns, setCorrectAns] = useState(0);
 useEffect(() => {
+  if(QuizData?.timer==0) return
     let timer;
     if (count > 0) {
       timer = setInterval(() => {
@@ -80,7 +81,7 @@ useEffect(() => {
                     {CurrentQuestion}/{QuizData?.Questions.length}
                   </h3>
                   {data?.timer !== 0 ? (
-                    <h3 style={{ color: "#D60000" }}>00:{count}s</h3>
+                    <h3 style={{ color: "#D60000" }}>{QuizData?.timer!=0 &&`00:${count}s`} </h3>
                   ) : (
                     <div></div>
                   )}
@@ -102,21 +103,21 @@ useEffect(() => {
                           : { background: "#F0F0F0" }
                       }
                     >
-                      {data.OptionType === optionType[0] && <p>{val.text}</p>}
-                      {data?.OptionType === optionType[1] && (
+                      {QuizData?.Questions[0]?.OptionType === optionType[0] && <p>{val.text}</p>}
+                       {QuizData?.Questions[0]?.OptionType === optionType[1] && (
                         <img
-                          width="270px"
-                          height="121px"
+                          style={window.innerWidth<=700?{width:'300px',
+                          height:" 70px" }:{ width:'300px',
+                          height:" 123px" }}
                           alt="optionImg"
                           src={val?.imageUrl}
                         />
                       )}
-                      {data?.OptionType === optionType[2] && (
+                      {QuizData?.Questions[0]?.OptionType === optionType[2] && (
                         <div style={{ display: "flex", gap: "10px" ,justifyContent:'center'}}>
                           <p>{val?.text}</p>
                           <img
-                            width="136px"
-                            height="111px"
+                          
                             alt=""
                             src={val?.imageUrl}
                           />

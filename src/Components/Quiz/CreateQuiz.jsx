@@ -32,7 +32,7 @@ const CreateQuiz = ({
     { text: "10 sec", value: 10 },
   ];
 
-  const [CheckOptionType, setCheckOptionType] = useState("Text");
+  const [CheckOptionType, setCheckOptionType] = useState(QuizData?.Questions[0]?.OptionType||"Text");
   const [Slides, setSlides] = useState();
   const [CurrentSlides, setCurrentSlides] = useState(0);
   const [openShareLink, setopenShareLink] = useState(false);
@@ -231,6 +231,7 @@ const CreateQuiz = ({
     }
     return result;
   };
+
   const handleCreateQuiz = async () => {
     if (error) {
       setError(false);
@@ -343,6 +344,7 @@ const CreateQuiz = ({
     }
     return;
   };
+  
   return (
     <>
       <Modal isOpen={OpenCreateQuiz} style={customStyles}>
@@ -543,8 +545,8 @@ const CreateQuiz = ({
             )}
           </div>
 
-          {QuizData?.QuizType ||
-            (QuizType === "Q&A" && (
+          {((QuizData?.QuizType === "Q&A" ||
+            QuizType === "Q&A") && (
               <div className={styles.timer}>
                 <h2
                   style={{

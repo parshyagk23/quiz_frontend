@@ -8,6 +8,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    padding: 0 10px;
 }
 
 .queno h3:first-child {
@@ -91,7 +92,8 @@
 }
 
 .options img {
-
+    width:130px;
+    height:111px;
     border-radius: 10px;
 }
 
@@ -154,11 +156,12 @@
     }
 
     .options div p {
-        line-height: 70px;
+        line-height: 50px;
     }
 
     .options div img {
-        height: 90px;
+        height: 52px;
+        width: 95px;
     }
     .Congrats,.quiztrophy{
         width:85vw;

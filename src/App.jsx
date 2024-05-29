@@ -3,6 +3,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import DashBoardPage from "./Pages/DashboardPage/DashBoardPage";
 import ProtectedRoute from "./Components/ProtectRoute";
 import QuizInterfacePage from "./Pages/QuizInterface/QuizInterfacePage";
+import PageNotFond from "./Pages/PageNotFound";
 function App() {
   return (
     <>
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<ProtectedRoute Component={DashBoardPage} />} />
         <Route path="/quiz/:id" element={<QuizInterfacePage/>} />
+        <Route path="*" element={<PageNotFond/>} />
         
       </Routes>
     </>
