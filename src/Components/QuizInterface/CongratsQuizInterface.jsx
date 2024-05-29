@@ -6,7 +6,8 @@ const CongratsQuizInterface = ({ QuizType, QuizLen, CorrectAns }) => {
  
   const customStyles = {
     content: {
-      width: "70vw",
+      width: window.innerWidth<=700?"100vw": "80vw",
+      height: window.innerWidth<=700?"100vh": "80vh",
       top: "50%",
       left: "50%",
       right: "auto",
@@ -31,7 +32,7 @@ const CongratsQuizInterface = ({ QuizType, QuizLen, CorrectAns }) => {
               <div>
                 <h1>Congrats Quiz is completed</h1>
               </div>
-              <div style={{ width: "22vw", margin: " 0 auto" }}>
+              <div className={styles.quiztrophy} >
                 <img src={trophy} alt="trophy" />
               </div>
               <div>
@@ -44,8 +45,8 @@ const CongratsQuizInterface = ({ QuizType, QuizLen, CorrectAns }) => {
               </div>
             </>
           ) : (
-            <div>
-              <h1 style={{ fontSize:'74px', lineHeight:'111px' ,textAlign:'center',fontWeight:'700' }} >Thank you for participating in the Poll</h1>
+            <div className={styles.poll}>
+              <h1  >Thank you for participating in the Poll</h1>
 
             </div>
           )}

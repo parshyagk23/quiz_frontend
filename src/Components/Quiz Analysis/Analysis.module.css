@@ -44,7 +44,7 @@ table thead tr th,table tbody tr td{
     line-height: 40px;
     text-align: center;
 }
-svg{
+tbody tr td svg{
     margin-top: 20px;
     margin-right: 10px;
     cursor: pointer;

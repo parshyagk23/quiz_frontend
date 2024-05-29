@@ -7,7 +7,7 @@ const Quizinterface = ({ QuizData }) => {
   const customStyles = {
     content: {
       width: window.innerWidth<=700?"100vw": "80vw",
-      height: window.innerWidth<=700?"100vh": "0",
+      height: window.innerWidth<=700?"100vh": "",
       top: "50%",
       left: "50%",
       right: "auto",
