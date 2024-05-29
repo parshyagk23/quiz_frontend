@@ -106,9 +106,9 @@ useEffect(() => {
                       {QuizData?.Questions[0]?.OptionType === optionType[0] && <p>{val.text}</p>}
                        {QuizData?.Questions[0]?.OptionType === optionType[1] && (
                         <img
-                          style={window.innerWidth<=700?{width:'300px',
-                          height:" 70px" }:{ width:'300px',
-                          height:" 123px" }}
+                          style={window.innerWidth<=700?{width:'290px',
+                          height:" 60px", margin:'4px' }:{ width:'300px',
+                          height:" 128px" }}
                           alt="optionImg"
                           src={val?.imageUrl}
                         />
