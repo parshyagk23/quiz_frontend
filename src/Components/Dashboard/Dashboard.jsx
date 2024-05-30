@@ -54,7 +54,7 @@ const Dashboard = ({QuizAnalysis}) => {
         </div>
         <div className={styles.impressions}>
           <h1>
-            {ConvertImpressionToK(impressions)}<span>Tolal</span>
+            {ConvertImpressionToK(impressions)}<span>ToTal</span>
           </h1>
           <p>Impressions</p>
         </div>

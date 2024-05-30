@@ -261,14 +261,14 @@ const CreateQuiz = ({
       let count = 0;
       Options.map((data) => {
         const { text, imageUrl, isCorrectAns, PollCount } = data;
-        if (OptionType === "Q&A" && !isCorrectAns) count++;
+        if ((QuizType === "Q&A" || !QuizData?.QuizType==='Q&A' )&& !isCorrectAns) count++;
 
         if (count === Options.length) {
           setError(true);
           isError = true;
           return;
         }
-        if (OptionType === "Q&A") {
+        if (QuizType === "Q&A" || !QuizData?.QuizType==='Q&A') {
           if (OptionType === optionType[0]) {
             if (text === "" || isCorrectAns == undefined) {
               setError(true);
@@ -288,8 +288,7 @@ const CreateQuiz = ({
               return;
             }
           }
-        } else if (OptionType === "Poll") {
-          console.log(OptionType);
+        } else if (QuizType === "Poll"  || !QuizData?.QuizType==='Poll') {
           if (OptionType === optionType[0]) {
             if (text === "") {
               setError(true);
@@ -311,6 +310,7 @@ const CreateQuiz = ({
           }
         }
       });
+     
     });
    
     if (isError) return;
@@ -337,7 +337,7 @@ const CreateQuiz = ({
 
     let res;
     if (!isError) {
-      res = await PostQuiz(QuizName, QuizType, newQuizId, Quiz, timer);
+      // res = await PostQuiz(QuizName, QuizType, newQuizId, Quiz, timer);
     }
     if (res?.message === "Quiz create successfully") {
       setopenShareLink(true);
