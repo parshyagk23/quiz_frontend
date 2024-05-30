@@ -13,9 +13,9 @@ export const PostQuiz = async (QuizName,QuizType,QuizId,Questions,timer) => {
                                                     Impressions,timer
                                                 });
         
-        return responce.data;
+        return responce?.data;
     } catch (error) {
-        return error.response;
+        return error?.response;
     }
   };
 
@@ -29,9 +29,9 @@ export const UpdatedQuiz = async (id,QuizName,QuizType,QuizId,Questions,timer,Im
                                                     Impressions,timer
                                                 });
         console.log("update")
-        return responce.data;
+        return responce?.data;
     } catch (error) {
-        return error.response;
+        return error?.response;
     }
   };
 
@@ -43,9 +43,9 @@ export const getQuizByUserId = async () => {
        
         const responce = await axios.get(reqUrl);
         
-        return responce.data;
+        return responce?.data;
     } catch (error) {
-        return error.response;
+        return error?.response;
     }
   };
 
@@ -53,9 +53,9 @@ export const getQuizById = async (id) => {
     try {
         const reqUrl = `${QUIZURL}/${id}`;
         const responce = await axios.get(reqUrl);
-        return responce.data;
+        return responce?.data;
     } catch (error) {
-        return error.response;
+        return error?.response;
     }
   };
 
@@ -63,9 +63,9 @@ export const getCorrectAns = async (quizid,questionindex,optionindex) => {
     try {
         const reqUrl = `${QUIZURL}/correctquizans/${quizid}/${questionindex}/${optionindex}`;
         const responce = await axios.get(reqUrl);
-        return responce.data;
+        return responce?.data;
     } catch (error) {
-        return error.response;
+        return error?.response;
     }
   };
 
@@ -73,8 +73,8 @@ export const DeleteQuizById = async (quizid) => {
     try {
         const reqUrl = `${QUIZURL}/delete/${quizid}`
         const responce = await axios.delete(reqUrl);
-        return responce.data;
+        return responce?.data;
     } catch (error) {
-        return error.response;
+        return error?.response;
     }
   };
