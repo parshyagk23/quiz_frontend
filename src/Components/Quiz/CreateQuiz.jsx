@@ -464,7 +464,7 @@ const CreateQuiz = ({
                   name=""
                   id=""
                   style={
-                    QuizData?.QuizType || QuizType === "Poll"
+                    QuizData?.QuizType === "Poll" || QuizType === "Poll"
                       ? { display: "none" }
                       : {}
                   }
