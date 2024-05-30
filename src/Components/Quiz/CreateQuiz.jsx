@@ -337,7 +337,7 @@ const CreateQuiz = ({
 
     let res;
     if (!isError) {
-      // res = await PostQuiz(QuizName, QuizType, newQuizId, Quiz, timer);
+      res = await PostQuiz(QuizName, QuizType, newQuizId, Quiz, timer);
     }
     if (res?.message === "Quiz create successfully") {
       setopenShareLink(true);
