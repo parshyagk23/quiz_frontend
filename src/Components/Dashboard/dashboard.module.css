@@ -76,10 +76,13 @@
 }
 
 .trending {
-    height: calc(58vh - 71px);
-    width: 68vw;
+    height: calc(50vh - 71px);
+    width: 70vw;
     margin: 0 auto;
     margin-top: 30px;
+    overflow-y:scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 
 .trendingtext {

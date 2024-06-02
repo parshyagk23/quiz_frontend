@@ -25,6 +25,7 @@ const Quizinterface = ({ QuizData }) => {
   const [SelectedOption, setSelectedOption] = useState();
   const [OpenContgrats, setOpenContgrats] = useState(false);
   const [CorrectAns, setCorrectAns] = useState(0);
+  
 useEffect(() => {
   if(QuizData?.timer==0) return
     let timer;
@@ -72,7 +73,7 @@ useEffect(() => {
         style={customStyles}
         overlayClassName={styles.overlayclass}
       >
-        {QuizData?.Questions?.map((data, index) => (
+      {!QuizData ? <h1 className={styles.laoding} >loading...</h1>:  QuizData?.Questions?.map((data, index) => (
           <div key={index}>
             {index + 1 === CurrentQuestion && (
               <section>
@@ -81,7 +82,7 @@ useEffect(() => {
                     {CurrentQuestion}/{QuizData?.Questions.length}
                   </h3>
                   {data?.timer !== 0 ? (
-                    <h3 style={{ color: "#D60000" }}>{QuizData?.timer!=0 &&`00:${count}s`} </h3>
+                    <h3 style={{ color: "#D60000" }}>{QuizData?.timer!=0 &&`00:${count==undefined?0:count}s`} </h3>
                   ) : (
                     <div></div>
                   )}
@@ -142,6 +143,7 @@ useEffect(() => {
             )}
           </div>
         ))}
+      
       </Modal>
       {OpenContgrats && (
         <CongratsQuizInterface

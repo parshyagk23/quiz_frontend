@@ -37,6 +37,8 @@ const Dashboard = ({QuizAnalysis}) => {
     useEffect(()=>{
       GenerateQuizQuestionLength()
     },[QuizAnalysis])
+
+    console.log(QuizAnalysis)
   return (
     <main className={styles.dashboardcontainer}>
       <section className={styles.quizData}>
@@ -60,6 +62,7 @@ const Dashboard = ({QuizAnalysis}) => {
         </div>
       </section>
         <h1 className={styles.trendingtext} >Trending Quiz</h1>
+      {QuizAnalysis?.length==0 ?<h1 className={styles.trendingtext}  style={{ width:'50vw', margin:'0 auto', color:'black' }} >Quiz not created yet create quiz</h1>:
       <section className={styles.trending}>
         <section  >
         {sortedQuiz?.map((data,index)=>(
@@ -104,7 +107,7 @@ const Dashboard = ({QuizAnalysis}) => {
          </div>
         ))}
         </section>
-      </section>
+      </section> } 
     </main>
   );
 };
